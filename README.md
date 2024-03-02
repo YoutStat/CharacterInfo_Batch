@@ -1,6 +1,7 @@
-# Your Stat - CharacterInfo Batch Server
+# Your Stat - CharacterInfo Server
 ## About Repository
 ## History
+- 캐릭터 직업 및 전투력 조회 기능 구현 완료 (2024.03.03)
 ## Trouble Shooting
 ## Git Convention
 ```
