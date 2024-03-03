@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class ParseDto {
     private String classType;
-    private long combatPower;
+    private String combatPower;
 
     public ParseDto(String classType, String combatPower) {
         this.classType = classType;
-        this.combatPower = Long.parseLong(combatPower);
+        this.combatPower = combatPower;
     }
 }
