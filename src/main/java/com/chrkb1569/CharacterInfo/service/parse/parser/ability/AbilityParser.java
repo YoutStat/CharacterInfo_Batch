@@ -1,4 +1,4 @@
-package com.chrkb1569.CharacterInfo.service.parse.parser;
+package com.chrkb1569.CharacterInfo.service.parse.parser.ability;
 
 import com.chrkb1569.CharacterInfo.service.api.APIService;
 import lombok.RequiredArgsConstructor;
@@ -15,17 +15,20 @@ import static com.chrkb1569.CharacterInfo.util.APIValidator.checkAPIValidation;
 @Component
 @RequiredArgsConstructor
 public class AbilityParser {
-    @Value("${api.info.abilityKey}")
+    @Value("${api.request.ability.abilityKey}")
     private String ABILITY_KEY;
 
-    @Value("${api.info.abilityValue}")
+    @Value("${api.request.ability.abilityValue}")
     private String ABILITY_VALUE;
+
+    @Value("${api.request.ability.url}")
+    private String REQUEST_URL;
 
     private final APIService apiService;
 
     // 캐릭터의 어빌리티 조회
     public List<String> getAbility(String characterIdentifier) {
-        String apiData = apiService.getCharacterAbility(characterIdentifier);
+        String apiData = apiService.requestData(REQUEST_URL, characterIdentifier);
 
         if(!checkAPIValidation(apiData)) return null;
 
