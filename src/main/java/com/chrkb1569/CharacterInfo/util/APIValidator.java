@@ -8,10 +8,10 @@ import static com.chrkb1569.CharacterInfo.util.APIExceptionMessage.getErrorMessa
 
 @Slf4j
 public class APIValidator {
-    @Value("${api.info.errorKey}")
+    @Value("${api.request.error.errorKey}")
     private static String ERROR_KEY;
 
-    @Value("${api.info.errorType}")
+    @Value("${api.request.error.errorType}")
     private static String ERROR_TYPE;
 
     // API 데이터 유효성 확인

@@ -15,10 +15,7 @@ import java.time.LocalDate;
 @Service
 public class APIService {
     private final String API_KEY; // API를 호출하기 위한 Key값
-    private final String HTTP_REQUEST_ABILITY_URL; // API를 요청하기 위한 URL
-    private final String HTTP_REQUEST_CLASS_URL; // API를 요청하기 위한 URL
     private final String HTTP_REQUEST_CORE_URL; // API를 요청하기 위한 URL
-    private final String HTTP_REQUEST_HYPER_SKILL_URL; // API를 요청하기 위한 URL
     private final String HTTP_REQUEST_HYPER_STAT_URL; // API를 요청하기 위한 URL
     private final String HTTP_REQUEST_METHOD; // API 요청시에 사용되는 HTTP Method
     private final String HTTP_REQUEST_HEADER; // API 요청시에 사용되는 HTTP 헤더값
@@ -27,40 +24,23 @@ public class APIService {
 
     public APIService(
             @Value("${api.request.key}") String apiKey,
-            @Value("${api.request.ability.url}") String abilityUrl,
-            @Value("${api.request.class.url}") String classUrl,
             @Value("${api.request.core.url}") String coreUrl,
-            @Value("${api.request.hyperSkill.url}") String hyperSkillUrl,
             @Value("${api.request.hyperStat.url}") String hyperStatUrl,
-            @Value("${api.info.requestMethod}") String requestMethod,
-            @Value("${api.info.requestHeader}") String requestHeader
+            @Value("${api.request.method}") String requestMethod,
+            @Value("${api.request.header}") String requestHeader
     ) {
         this.API_KEY = apiKey;
-        this.HTTP_REQUEST_ABILITY_URL = abilityUrl;
-        this.HTTP_REQUEST_CLASS_URL = classUrl;
         this.HTTP_REQUEST_CORE_URL = coreUrl;
-        this.HTTP_REQUEST_HYPER_SKILL_URL = hyperSkillUrl;
         this.HTTP_REQUEST_HYPER_STAT_URL = hyperStatUrl;
         this.HTTP_REQUEST_METHOD = requestMethod;
         this.HTTP_REQUEST_HEADER = requestHeader;
         this.HTTP_REQUEST_DATE = LocalDate.now().minusDays(DATE_GAP).toString();
     }
 
-    // 캐릭터 세부 능력치 정보 반환
-    public String getCharacterClassInfo(String characterIdentifier) {
+    // API 데이터 요청
+    public String requestData(String requestUrl, String characterIdentifier) {
         try {
-            HttpURLConnection connection = getURLConnection(HTTP_REQUEST_CLASS_URL, characterIdentifier);
-
-            return getAPIResult(connection);
-        } catch (IOException e) {
-            throw new APIRequestException();
-        }
-    }
-
-    // 캐릭터 어빌리티 정보 반환
-    public String getCharacterAbility(String characterIdentifier) {
-        try {
-            HttpURLConnection connection = getURLConnection(HTTP_REQUEST_ABILITY_URL, characterIdentifier);
+            HttpURLConnection connection = getURLConnection(requestUrl, characterIdentifier);
 
             return getAPIResult(connection);
         } catch (IOException e) {

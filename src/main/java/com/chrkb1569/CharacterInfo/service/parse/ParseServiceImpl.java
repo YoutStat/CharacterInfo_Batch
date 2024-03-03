@@ -1,8 +1,10 @@
 package com.chrkb1569.CharacterInfo.service.parse;
 
-import com.chrkb1569.CharacterInfo.service.parse.dto.ParseDto;
-import com.chrkb1569.CharacterInfo.service.parse.parser.AbilityParser;
-import com.chrkb1569.CharacterInfo.service.parse.parser.ClassInfoParser;
+import com.chrkb1569.CharacterInfo.service.parse.parser.classInfo.dto.ClassInfoDto;
+import com.chrkb1569.CharacterInfo.service.parse.parser.ability.AbilityParser;
+import com.chrkb1569.CharacterInfo.service.parse.parser.classInfo.ClassInfoParser;
+import com.chrkb1569.CharacterInfo.service.parse.parser.hyperSkill.HyperSkillParser;
+import com.chrkb1569.CharacterInfo.service.parse.parser.hyperSkill.dto.HyperSkillDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +15,20 @@ import java.util.List;
 public class ParseServiceImpl implements ParseService {
     private final ClassInfoParser classInfoParser;
     private final AbilityParser abilityParser;
+    private final HyperSkillParser hyperSkillParser;
 
     @Override
-    public ParseDto getClassInfo(String characterIdentifier) {
+    public ClassInfoDto getClassInfo(String characterIdentifier) {
         return classInfoParser.getClassInfo(characterIdentifier);
     }
 
     @Override
     public List<String> getAbility(String characterIdentifier) {
         return abilityParser.getAbility(characterIdentifier);
+    }
+
+    @Override
+    public List<HyperSkillDto> getHyperSkills(String characterIdentifier) {
+        return hyperSkillParser.getHyperSkills(characterIdentifier);
     }
 }
