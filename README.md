@@ -2,6 +2,7 @@
 ## About Repository
 ## History
 - 캐릭터 직업 및 전투력 조회 기능 구현 완료 (2024.03.03)
+- 캐릭터 어빌리티 조회 기능 구현 완료 (2024.03.04)
 ## Trouble Shooting
 ## Git Convention
 ```
