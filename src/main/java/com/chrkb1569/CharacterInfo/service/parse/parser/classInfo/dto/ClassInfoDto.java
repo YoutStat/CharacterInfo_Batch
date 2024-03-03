@@ -1,13 +1,13 @@
-package com.chrkb1569.CharacterInfo.service.parse.dto;
+package com.chrkb1569.CharacterInfo.service.parse.parser.classInfo.dto;
 
 import lombok.Getter;
 
 @Getter
-public class ParseDto {
+public class ClassInfoDto {
     private String classType;
     private String combatPower;
 
-    public ParseDto(String classType, String combatPower) {
+    public ClassInfoDto(String classType, String combatPower) {
         this.classType = classType;
         this.combatPower = combatPower;
     }
