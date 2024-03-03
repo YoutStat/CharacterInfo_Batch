@@ -1,5 +1,7 @@
 package com.chrkb1569.CharacterInfo.domain;
 
+import java.util.Arrays;
+
 public enum CharacterClass {
     CLASS_HERO("히어로"),
     CLASS_DARK_KNIGHT("다크나이트"),
@@ -53,5 +55,16 @@ public enum CharacterClass {
 
     CharacterClass(String type) {
         this.type = type;
+    }
+
+    public static boolean checkValidation(String classType) {
+        return Arrays.stream(values())
+                .anyMatch(characterClass -> characterClass.type.equals(classType));
+    }
+
+    public static CharacterClass getClassType(String classType) {
+        return Arrays.stream(values())
+                .filter(characterClass -> characterClass.type.equals(classType))
+                .findFirst().get();
     }
 }

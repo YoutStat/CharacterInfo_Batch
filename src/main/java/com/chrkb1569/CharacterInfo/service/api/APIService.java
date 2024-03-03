@@ -46,9 +46,10 @@ public class APIService {
         this.HTTP_REQUEST_DATE = LocalDate.now().minusDays(DATE_GAP).toString();
     }
 
+    // 캐릭터 세부 능력치 정보 반환
     public String getCharacterClassInfo(String characterIdentifier) {
         try {
-            HttpURLConnection connection = getURLConnection(characterIdentifier);
+            HttpURLConnection connection = getURLConnection(HTTP_REQUEST_CLASS_URL, characterIdentifier);
 
             return getAPIResult(connection);
         } catch (IOException e) {
@@ -56,14 +57,27 @@ public class APIService {
         }
     }
 
-    private HttpURLConnection getURLConnection(final String characterIdentifier) throws IOException {
-        URL url = getURL(characterIdentifier);
+    // 캐릭터 어빌리티 정보 반환
+    public String getCharacterAbility(String characterIdentifier) {
+        try {
+            HttpURLConnection connection = getURLConnection(HTTP_REQUEST_ABILITY_URL, characterIdentifier);
+
+            return getAPIResult(connection);
+        } catch (IOException e) {
+            throw new APIRequestException();
+        }
+    }
+
+    // UrlConnection 생성
+    private HttpURLConnection getURLConnection(String requestURL, final String characterIdentifier) throws IOException {
+        URL url = getRequestURL(requestURL, characterIdentifier);
 
         return getUrlConnection(url);
     }
 
-    private URL getURL(final String characterIdentifier) throws IOException {
-        return new URL(String.format(HTTP_REQUEST_CLASS_URL, characterIdentifier, HTTP_REQUEST_DATE));
+    // 요청 파라미터를 파싱하여 요청 URL 생성
+    private URL getRequestURL(String requestUrl, String characterIdentifier) throws IOException {
+        return new URL(String.format(requestUrl, characterIdentifier, HTTP_REQUEST_DATE));
     }
 
     // HTTP connection 설정
