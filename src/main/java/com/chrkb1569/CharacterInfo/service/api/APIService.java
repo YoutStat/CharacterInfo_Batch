@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Service
 public class APIService {
     private final String API_KEY; // API를 호출하기 위한 Key값
-    private final String HTTP_REQUEST_HYPER_STAT_URL; // API를 요청하기 위한 URL
     private final String HTTP_REQUEST_METHOD; // API 요청시에 사용되는 HTTP Method
     private final String HTTP_REQUEST_HEADER; // API 요청시에 사용되는 HTTP 헤더값
     private final String HTTP_REQUEST_DATE; // API 요청시에 사용되는 날짜
@@ -23,12 +22,10 @@ public class APIService {
 
     public APIService(
             @Value("${api.request.key}") String apiKey,
-            @Value("${api.request.hyperStat.url}") String hyperStatUrl,
             @Value("${api.request.method}") String requestMethod,
             @Value("${api.request.header}") String requestHeader
     ) {
         this.API_KEY = apiKey;
-        this.HTTP_REQUEST_HYPER_STAT_URL = hyperStatUrl;
         this.HTTP_REQUEST_METHOD = requestMethod;
         this.HTTP_REQUEST_HEADER = requestHeader;
         this.HTTP_REQUEST_DATE = LocalDate.now().minusDays(DATE_GAP).toString();
